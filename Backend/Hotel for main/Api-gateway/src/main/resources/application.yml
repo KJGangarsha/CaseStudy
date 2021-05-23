@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: Api-Gateway
+  cloud:
+    gateway:
+      routes:
+        - id: Owner-boot
+          uri: lb://OWNER-BOOT
+          predicates:
+            - Path=/owner/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: Owner-boot
+                fallbackuri: forward:/ownerFallBack
+        - id: Manager-boot
+          uri: lb://MANAGER-BOOT
+          predicates:
+            - Path=/manager/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: Manager-boot
+                fallbackuri: forward:/managerFallBack
+        - id: Guest-boot
+          uri: lb://GUEST-BOOT
+          predicates:
+            - Path=/guest/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: Guest-boot
+                fallbackuri: forward:/guestFallBack
+
+eureka:
+  client:
+    register-with-eureka: true
+    fecth-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 50000

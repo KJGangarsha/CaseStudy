@@ -1,0 +1,20 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: Guest-boot
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: Hotel
+
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mydb
+    username: root
+    password: Amma@2000
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
