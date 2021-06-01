@@ -89,7 +89,7 @@ class CheckIn extends Component {
                   </td>
                   <td>
                     {" "}
-                    <b>{room.roomPrice}</b>{" "}
+                    <b>$ {room.roomPrice}</b>{" "}
                   </td>
                   <td>
                     {" "}
@@ -118,6 +118,7 @@ class CheckIn extends Component {
         </div>
         <h5>
             Available rooms :<i>{this.state.rooms.length}</i>
+            {localStorage.setItem("check",this.state.rooms.length)}   
           </h5>
         <br />
         <br />

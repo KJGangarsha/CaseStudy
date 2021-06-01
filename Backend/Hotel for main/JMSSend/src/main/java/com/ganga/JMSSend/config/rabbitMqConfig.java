@@ -1,6 +1,6 @@
 package com.ganga.JMSSend.config;
 
-//import com.ganga.JMSSend.receiver.messageReceiver;
+import com.ganga.JMSSend.receiver.messageReceiver;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
@@ -52,7 +52,7 @@ public class rabbitMqConfig
         return BindingBuilder.bind(queue).to(exchange).with(queueName);
     }
 
-    /*@Bean
+    @Bean
     SimpleMessageListenerContainer container(
             ConnectionFactory connectionFactory,
             MessageListenerAdapter listenerAdapter) {
@@ -73,7 +73,7 @@ public class rabbitMqConfig
     @Bean
     MessageListenerAdapter listenerAdapter(messageReceiver receiver) {
         return new MessageListenerAdapter(receiver, "receiveMsg");
-    }*/
+    }
 
 
 }

@@ -23,15 +23,17 @@ function Register() {
         setRegisterStatus(response.data.message);
       } else {
         setRegisterStatus("registered new user " + usernamereg);
-        history.push("/owner");
+        history.push("/ownerView");
         alert("User Registered Successfully");
+        window.location.reload();
       }
     });
   };
 
   /* Cancel method */
   const cancel = () => {
-    history.push("/owner");
+    history.push("/ownerView");
+    window.location.reload();
   };
 
   return (
@@ -50,21 +52,21 @@ function Register() {
     >
       <div className="text-center">
         {/* register form */}
-        <br />
-        <br />
-        <h2>
+        <img
+            src="https://png.pngtree.com/png-vector/20191003/ourmid/pngtree-user-login-or-authenticate-icon-on-gray-background-flat-icon-ve-png-image_1786166.jpg"
+            alt="profile-img"
+            className="profile-img-card"
+            style={{ width:'50%',height:'20%',backgroundColor:"lightcoral"}}            
+          />
+        <h4>
           <b>
             <u>
               <i>Setup a new User</i>
             </u>
           </b>
-        </h2>
-        <br />
-        <label>
-          <b>
-            <i>Username:</i>
-          </b>
-        </label>
+        </h4>
+        <br />        
+        <label className="fas fa-user"></label> <b>Username  :</b>
         <input
           style={{ borderRadius: "10px", borderWidth: "3px" }}
           type="text"
@@ -76,12 +78,7 @@ function Register() {
         ></input>
         <br />
         <br />
-
-        <label>
-          <b>
-            <i>Password:</i>
-          </b>
-        </label>
+        <label className="fas fa-cog"> </label><b> Password  :</b>
         <input
           style={{ borderRadius: "10px", borderWidth: "3px" }}
           type="text"
@@ -93,12 +90,7 @@ function Register() {
         ></input>
         <br />
         <br />
-
-        <label>
-          <b>
-            <i>Role:</i>
-          </b>
-        </label>
+        <label className="fas fa-wrench"> </label><b> Role  :</b>
         <select
           style={{ borderRadius: "10px", borderWidth: "3px" }}
           type="text"

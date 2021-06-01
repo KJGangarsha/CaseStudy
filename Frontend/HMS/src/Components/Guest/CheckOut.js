@@ -5,38 +5,28 @@ import GuestService from "../../Services/GuestService";
 class CheckOut extends Component {
   constructor(props) {
     super(props);
-
+    
     /* Declaring state variables */
     this.state = {
       guests: [],
-      backEndToken: localStorage.getItem("backEndToken"),
+      backEndToken: localStorage.getItem("backEndToken")      
     };
     /* Binding handlers */
     this.editGuest = this.editGuest.bind(this);
-    this.checkOutGuest = this.checkOutGuest.bind(this);
+    this.checkOutGuest = this.checkOutGuest.bind(this);    
   }
 
   /* Component did mount method */
   componentDidMount() {
     GuestService.getGuests(this.state.backEndToken).then((res) => {
       this.setState({ guests: res.data });
-    });
-  }
+    });        
+  }  
 
   /* edit guest method */
   editGuest = (guestId) => {
     this.props.history.push(`/editGuest/${guestId}`);
   };
-
-  /* Delete guest method */
-
-  deleteGuest(guestId) {
-    GuestService.deleteGuest(guestId).then((res) => {
-      this.setState({
-        guests: this.state.guests.filter((guest) => guest.guestId !== guestId),
-      });
-    });
-  }
 
   /* view guest method */
   viewGuest(guestId) {
@@ -140,7 +130,8 @@ class CheckOut extends Component {
         </div>
         <br />
         <h5>
-          Checked_In Guests :<i>{this.state.guests.length}</i>
+          Checked_In Guests :<i>{this.state.guests.length}</i>    
+          {localStorage.setItem("checkin",this.state.guests.length)}          
         </h5>
         <br />
         <br />

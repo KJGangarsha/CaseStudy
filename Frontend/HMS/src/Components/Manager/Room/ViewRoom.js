@@ -92,7 +92,7 @@ class ViewRoom extends Component {
               <br />
               <div>
                 {" "}
-                <i>{this.state.room.roomPrice}</i>
+                <i>$ {this.state.room.roomPrice}</i>
               </div>
             </div>
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import swal from 'sweetalert';
 import GuestService from "../../Services/GuestService";
 import SimpleReactValidator from "simple-react-validator";
 
@@ -92,8 +93,10 @@ class UpdateGuest extends Component {
         this.state.backEndToken
       ).then((res) => {
         this.props.history.push("/checkOut");
-        alert("Guest Updated");
-        window.location.reload();
+        swal({
+          title: "Guest Updated",            
+          icon: "success",
+        });        
       });
     } else {
       this.validator.showMessages();

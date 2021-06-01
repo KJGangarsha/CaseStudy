@@ -110,7 +110,7 @@ class ViewGuestLog extends Component {
                     <b>{guest.paymentMethod}</b>{" "}
                   </td>
                   <td>
-                    <b>{guest.billAmount}</b>{" "}
+                    <b>$ {guest.billAmount}</b>{" "}
                   </td>
                 </tr>
               ))}

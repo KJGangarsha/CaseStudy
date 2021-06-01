@@ -222,7 +222,7 @@ class CheckOutGuest extends Component {
                     {" "}
                     <b>Bill Amount:</b>{" "}
                   </label>
-                  <div>{this.state.price * this.state.days}</div>
+                  <div>${this.state.price * this.state.days}</div>
                 </div>
 
                 <div className="row">

@@ -9,7 +9,7 @@ function Home() {
         className="text-center"
         style={{
           marginTop: "20px",
-          marginBottom: "-130px",
+          marginBottom: "-80px",
           fontFamily: "cursive",
           color: "white"
         }}
@@ -17,10 +17,9 @@ function Home() {
         <h2>Welcome to Grand AJ Inn.</h2>
       </div>
       <header className="App-header">
-        <img
-          /* src="https://i.pinimg.com/736x/76/a4/57/76a4576c8fd17978f5414c47376c98e0.jpg" */
-          src="https://i.pinimg.com/originals/e8/ce/50/e8ce50ac38aa03a14e267557586b8798.png"
-          /* className="App-logo" */
+        <img          
+          src="https://media.giphy.com/media/dUrzJSmF9iJoy8KhFo/giphy.gif"
+          width="90%"                              
           alt="logo"
         />
       </header>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import swal from 'sweetalert';
 import OwnerService from "../../Services/OwnerService";
 import SimpleReactValidator from "simple-react-validator";
 
@@ -81,9 +82,11 @@ class AddManager extends Component {
 
       OwnerService.createEmployee(employee, this.state.backEndToken).then(
         (res) => {
-          this.props.history.push("/ownerView");
-          alert("New Manager Added");
-          window.location.reload();
+          this.props.history.push("/ownerView");          
+          swal({
+            title: "New Manager Added",            
+            icon: "success",
+          });          
         }
       );
     } else {

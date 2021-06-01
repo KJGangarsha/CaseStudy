@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import Swal from 'sweetalert2';
+import swal from 'sweetalert';
+import withReactContent from 'sweetalert2-react-content';
 import ManagerService from "../../../Services/ManagerService";
 
 class RoomView extends Component {
   constructor(props) {
-    super(props);
+    super(props);    
+    this.Swal=new withReactContent(Swal);
 
     /* state variables */
     this.state = {
@@ -39,10 +43,32 @@ class RoomView extends Component {
       this.setState({
         rooms: this.state.rooms.filter((room) => room.roomId !== roomId),
       });
-      alert("Room deleted");
-      window.location.reload();
+      swal({
+        title: "Room deleted",            
+        icon: "success",
+      });      
     });
   }
+
+  opensweetalert(roomId){
+    new Swal({
+       title: 'Are you sure?',
+       text: 'You will not be able to recover!',
+       icon: 'warning',
+       showCancelButton: true,
+       confirmButtonText: 'Yes, delete!',
+       cancelButtonText: 'No'
+     })
+     .then((result) => {
+       if (result.isConfirmed) {
+         this.deleteRoom(roomId);         
+       
+       } else if (result.dismiss === Swal.DismissReason.cancel) {
+         this.props.history.push("/RoomView");
+         
+       }
+     })
+   }
 
   /* view room method */
   viewRoom(roomId) {
@@ -97,7 +123,7 @@ class RoomView extends Component {
                     Type :<b> {room.roomType}</b>
                   </h6>
                   <h6 className="card-text">
-                    Price : <b>{room.roomPrice}</b>
+                    Price : <b>$ {room.roomPrice}</b>
                   </h6>
                   <h6 className="card-text">
                     Status : <b>{room.roomStatus}</b>
@@ -111,14 +137,7 @@ class RoomView extends Component {
                   </button>
                   <button
                     style={{ marginLeft: "10px" }}
-                    onClick={() => {
-                      const confirmBox = window.confirm(
-                        "Are you sure you want to delete?"
-                      );
-                      if (confirmBox === true) {
-                        this.deleteRoom(room.roomId);
-                      }
-                    }}
+                    onClick={() => this.opensweetalert(room.roomId)}
                     className="btn btn-danger"
                   >
                     <b className="fas fa-trash">  </b>
@@ -139,6 +158,7 @@ class RoomView extends Component {
         <div>
           <h5>
             Number of Rooms :<i>{this.state.rooms.length}</i>
+            {localStorage.setItem("rooms",this.state.rooms.length)}   
           </h5>
           <br />
           <br />

@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import Swal from 'sweetalert2';
+import swal from 'sweetalert';
+import withReactContent from 'sweetalert2-react-content';
 import ManagerService from "../../../Services/ManagerService";
 
 class StaffView extends Component {
   constructor(props) {
     super(props);
+
+    this.Swal=new withReactContent(Swal);
 
     /* state variables */
     this.state = {
@@ -43,11 +48,34 @@ class StaffView extends Component {
             (employee) => employee.staffId !== staffId
           ),
         });
-        alert("Employee deleted");
-        window.location.reload();
+        swal({
+          title: "Employee deleted",            
+          icon: "success",
+        });        
       }
     );
   }
+
+  opensweetalert(staffId){
+    new Swal({
+       title: 'Are you sure?',
+       text: 'You will not be able to recover!',
+       icon: 'warning',
+       showCancelButton: true,
+       confirmButtonText: 'Yes, delete!',
+       cancelButtonText: 'No'
+     })
+     .then((result) => {
+       if (result.isConfirmed) {
+         this.deleteEmployee(staffId);         
+       
+       } else if (result.dismiss === Swal.DismissReason.cancel) {
+         this.props.history.push("/staffView");
+         
+       }
+     })
+   }
+
 
   /* view employee method */
   viewEmployee(staffId) {
@@ -116,14 +144,7 @@ class StaffView extends Component {
                   </button>
                   <button
                     style={{ marginLeft: "10px" }}
-                    onClick={() => {
-                      const confirmBox = window.confirm(
-                        "Are you sure you want to delete?"
-                      );
-                      if (confirmBox === true) {
-                        this.deleteEmployee(employee.staffId);
-                      }
-                    }}
+                    onClick={() => this.opensweetalert(employee.staffId)}
                     className="btn btn-danger"
                   >
                     <b className="fas fa-trash">  </b>
@@ -143,6 +164,7 @@ class StaffView extends Component {
         <br />
         <h5>
           Staff count:<i>{this.state.employees.length}</i>
+          {localStorage.setItem("staff",this.state.employees.length)}   
         </h5>
         <br />
         <br />

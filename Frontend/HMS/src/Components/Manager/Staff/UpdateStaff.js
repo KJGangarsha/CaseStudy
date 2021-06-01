@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import swal from 'sweetalert';
 import ManagerService from "../../../Services/ManagerService";
 import SimpleReactValidator from "simple-react-validator";
 
@@ -85,8 +86,10 @@ export class UpdateStaff extends Component {
         this.state.backEndToken
       ).then((res) => {
         this.props.history.push("/staffView");
-        alert("Employee Updated");
-        window.location.reload();
+        swal({
+          title: "Employee Updated",            
+          icon: "success",
+        });        
       });
     } else {
       this.validator.showMessages();

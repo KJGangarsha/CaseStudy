@@ -33,15 +33,15 @@ function Login() {
           if (localStorage.getItem("role") === "owner") {
             history.push("/owner");
             alert("Logged-In Successfully");
-            window.location.reload();
+            //window.location.reload();
           } else if (localStorage.getItem("role") === "manager") {
             history.push("/manager");
             alert("Logged-In Successfully");
-            window.location.reload();
+            //window.location.reload();
           } else if (localStorage.getItem("role") === "staff") {
             history.push("/reception");
             alert("Logged-In Successfully");
-            window.location.reload();
+            //window.location.reload();
           } else {
             history.push("/home");
             window.location.reload();
@@ -117,16 +117,21 @@ function Login() {
     >
       <div className="text-center">
         {/* Login page */}
-        <br />
-        <br />
-        <h2>
+        <img
+            src="https://png.pngtree.com/png-vector/20191003/ourmid/pngtree-user-login-or-authenticate-icon-on-gray-background-flat-icon-ve-png-image_1786166.jpg"
+            alt="profile-img"
+            className="profile-img-card"
+            style={{ width:'50%',height:'20%',backgroundColor:"lightcoral"}}            
+          />
+        <h4>
           <b>
             <u>
               <i>Login</i>
             </u>
           </b>
-        </h2>
+        </h4> 
         <br />
+        <label className="fas fa-user"></label><b> Username  :</b>
         <input
           style={{ borderRadius: "10px", borderWidth: "3px" }}
           type="text"
@@ -138,6 +143,7 @@ function Login() {
         ></input>
         <br />
         <br />
+        <label className="fas fa-cog"> </label><b> Password  :</b>
         <input
           style={{ borderRadius: "10px", borderWidth: "3px" }}
           type="password"

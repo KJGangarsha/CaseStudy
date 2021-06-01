@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import swal from 'sweetalert';
 
 class CheckOutView extends Component {
   constructor(props) {
@@ -13,9 +14,11 @@ class CheckOutView extends Component {
   /* back method */
   back() {
     this.props.history.push("/checkOut");
-    alert("Guest Checked-Out");
-    localStorage.removeItem("billAmount");
-    window.location.reload();
+    swal({
+      title: "Guest Checked-Out",            
+      icon: "success",
+    });    
+    localStorage.removeItem("billAmount");    
   }
 
   render() {
@@ -63,7 +66,7 @@ class CheckOutView extends Component {
                 <b> Bill Paid : </b>
               </label>
               <br />
-              <div> {localStorage.getItem("billAmount")}</div>
+              <div> ${localStorage.getItem("billAmount")} </div>
             </div>
             <button
               title="back"

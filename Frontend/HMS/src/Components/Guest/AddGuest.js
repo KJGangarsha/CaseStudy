@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import GuestService from "../../Services/GuestService";
+import swal from 'sweetalert';
 import ManagerService from "../../Services/ManagerService";
 import SimpleReactValidator from "simple-react-validator";
 
@@ -102,9 +103,11 @@ class AddGuest extends Component {
       );
 
       GuestService.createGuest(guest, this.state.backEndToken).then((res) => {
-        this.props.history.push("/checkOut");
-        alert("New Guest checked-In");
-        window.location.reload();
+        this.props.history.push("/checkIn");
+        swal({
+          title: "New Guest checked-In",            
+          icon: "success",
+        });        
       });
     } else {
       this.validator.showMessages();

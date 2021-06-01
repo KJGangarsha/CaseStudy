@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import OwnerService from "../../Services/OwnerService";
+import swal from 'sweetalert';
 import SimpleReactValidator from "simple-react-validator";
 
 export class UpdateManager extends Component {
@@ -104,9 +105,11 @@ export class UpdateManager extends Component {
         this.state.managerId,
         this.state.backEndToken
       ).then((res) => {
-        this.props.history.push("/ownerView");
-        alert("Manager Updated");
-        window.location.reload();
+        this.props.history.push("/ownerView");        
+        swal({
+          title: "Manager Updated",            
+          icon: "success",
+        });        
       });
     } else {
       this.validator.showMessages();

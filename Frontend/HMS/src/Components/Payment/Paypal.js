@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { withRouter } from "react-router";
+import swal from 'sweetalert';
 
 function Paypal() {
   const paypal = useRef();
@@ -31,6 +32,10 @@ function Paypal() {
           const order = await actions.order.capture();
           if (order.status === "COMPLETED") {
             history.push("/checkOutView");
+            swal({
+              title: "Payment Done",            
+              icon: "success",
+            });
           }
         },
         onError: (err) => {

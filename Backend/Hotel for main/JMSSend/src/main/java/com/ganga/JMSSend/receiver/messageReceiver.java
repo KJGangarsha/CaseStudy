@@ -1,4 +1,3 @@
-/*
 package com.ganga.JMSSend.receiver;
 
 import java.util.concurrent.CountDownLatch;
@@ -19,4 +18,3 @@ public class messageReceiver
         return countDownLatch;
     }
 }
-*/

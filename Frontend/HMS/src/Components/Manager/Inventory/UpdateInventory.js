@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import ManagerService from "../../../Services/ManagerService";
+import swal from 'sweetalert';
 import SimpleReactValidator from "simple-react-validator";
 
 class UpdateInventory extends Component {
@@ -61,9 +62,11 @@ class UpdateInventory extends Component {
         this.state.inventoryId,
         this.state.backEndToken
       ).then((res) => {
-        this.props.history.push("/inventoryView");
-        alert("Inventory Updated");
-        window.location.reload();
+        this.props.history.push("/inventoryView");        
+        swal({
+          title: "Inventory Updated",            
+          icon: "success",
+        });
       });
     } else {
       this.validator.showMessages();

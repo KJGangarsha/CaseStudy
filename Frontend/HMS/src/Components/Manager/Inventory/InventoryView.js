@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import Swal from 'sweetalert2';
+import swal from 'sweetalert';
+import withReactContent from 'sweetalert2-react-content';
 import ManagerService from "../../../Services/ManagerService";
 
 class InventoryView extends Component {
   constructor(props) {
     super(props);
+
+    this.Swal=new withReactContent(Swal);
 
     /* state variables */
     this.state = {
@@ -43,11 +48,32 @@ class InventoryView extends Component {
             (inventory) => inventory.inventoryId !== inventoryId
           ),
         });
-        alert("Inventory Deleted");
-        window.location.reload();
+        swal({
+          title: "Inventory Deleted",            
+          icon: "success",
+        });
       }
     );
   }
+  opensweetalert(inventoryId){
+    new Swal({
+       title: 'Are you sure?',
+       text: 'You will not be able to recover!',
+       icon: 'warning',
+       showCancelButton: true,
+       confirmButtonText: 'Yes, delete!',
+       cancelButtonText: 'No'
+     })
+     .then((result) => {
+       if (result.isConfirmed) {
+         this.deleteInventory(inventoryId);         
+       
+       } else if (result.dismiss === Swal.DismissReason.cancel) {
+         this.props.history.push("/inventoryView");
+         
+       }
+     })
+   }
 
   /* view method call */
   viewInventory(inventoryId) {
@@ -114,14 +140,7 @@ class InventoryView extends Component {
                   </button>
                   <button
                     style={{ marginLeft: "10px" }}
-                    onClick={() => {
-                      const confirmBox = window.confirm(
-                        "Are you sure you want to delete?"
-                      );
-                      if (confirmBox === true) {
-                        this.deleteInventory(inventory.inventoryId);
-                      }
-                    }}
+                    onClick={() => this.opensweetalert(inventory.inventoryId)}
                     className="btn btn-danger"
                   >
                     <b className="fas fa-trash">  </b>

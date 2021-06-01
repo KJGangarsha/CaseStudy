@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import ManagerService from "../../../Services/ManagerService";
+import swal from 'sweetalert';
 import SimpleReactValidator from "simple-react-validator";
 
 class AddInventory extends Component {
@@ -44,9 +45,11 @@ class AddInventory extends Component {
 
       ManagerService.createInventory(inventory, this.state.backEndToken).then(
         (res) => {
-          this.props.history.push("/inventoryView");
-          alert("New Inventory created");
-          window.location.reload();
+          this.props.history.push("/inventoryView");          
+          swal({
+            title: "New Inventory created",            
+            icon: "success",
+          });          
         }
       );
     } else {

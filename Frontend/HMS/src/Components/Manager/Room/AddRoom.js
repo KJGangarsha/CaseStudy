@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import swal from 'sweetalert';
 import ManagerService from "../../../Services/ManagerService";
 import SimpleReactValidator from "simple-react-validator";
 
@@ -56,8 +57,10 @@ class AddRoom extends Component {
 
       ManagerService.createRoom(room, this.state.backEndToken).then((res) => {
         this.props.history.push("/roomView");
-        alert("New Room created");
-        window.location.reload();
+        swal({
+          title: "New Room created",            
+          icon: "success",
+        });        
       });
     } else {
       this.validator.showMessages();

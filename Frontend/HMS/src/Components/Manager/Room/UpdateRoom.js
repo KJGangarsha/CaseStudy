@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import swal from 'sweetalert';
 import ManagerService from "../../../Services/ManagerService";
 import SimpleReactValidator from "simple-react-validator";
 
@@ -75,8 +76,10 @@ class UpdateRoom extends Component {
         this.state.backEndToken
       ).then((res) => {
         this.props.history.push("/roomView");
-        alert("Room updated");
-        window.location.reload();
+        swal({
+          title: "Room updated",            
+          icon: "success",
+        });        
       });
     } else {
       this.validator.showMessages();

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import swal from 'sweetalert';
 import ManagerService from "../../../Services/ManagerService";
 import SimpleReactValidator from "simple-react-validator";
 
@@ -64,8 +65,10 @@ export class AddStaff extends Component {
       ManagerService.createEmployee(employee, this.state.backEndToken).then(
         (res) => {
           this.props.history.push("/staffView");
-          alert("New Employee Added");
-          window.location.reload();
+          swal({
+            title: "New Employee Added",            
+            icon: "success",
+          });          
         }
       );
     } else {

@@ -1,15 +1,20 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import Swal from 'sweetalert2';
+import swal from 'sweetalert';
+import withReactContent from 'sweetalert2-react-content';
 import OwnerService from "../../Services/OwnerService";
 
 export class OwnerView extends Component {
   constructor(props) {
     super(props);
 
+    this.Swal=new withReactContent(Swal);
+
     /* state variables */
     this.state = {
       employees: [],
-      backEndToken: localStorage.getItem("backEndToken"),
+      backEndToken: localStorage.getItem("backEndToken")
     };
     /* binding handlers */
     this.addManager = this.addManager.bind(this);
@@ -48,11 +53,33 @@ export class OwnerView extends Component {
             (employee) => employee.managerId !== managerId
           ),
         });
-        alert("Manager Deleted");
-        window.location.reload();
+        swal({
+          title: "Manager Deleted",            
+          icon: "success",
+        });        
       }
     );
   }
+
+  opensweetalert(managerId){
+    new Swal({
+       title: 'Are you sure?',
+       text: 'You will not be able to recover!',
+       icon: 'warning',
+       showCancelButton: true,
+       confirmButtonText: 'Yes, delete!',
+       cancelButtonText: 'No'
+     })
+     .then((result) => {
+       if (result.isConfirmed) {
+         this.deleteEmployee(managerId);         
+       
+       } else if (result.dismiss === Swal.DismissReason.cancel) {
+         this.props.history.push("/ownerView");
+         
+       }
+     })
+   }
 
   /* view employee method */
   viewEmployee(managerId) {
@@ -130,14 +157,7 @@ export class OwnerView extends Component {
                   </button>
                   <button
                     style={{ marginLeft: "10px" }}
-                    onClick={() => {
-                      const confirmBox = window.confirm(
-                        "Are you sure you want to delete?"
-                      );
-                      if (confirmBox === true) {
-                        this.deleteEmployee(employee.managerId);
-                      }
-                    }}
+                    onClick={() => this.opensweetalert(employee.managerId)}
                     className="btn btn-danger"
                   >
                     <b className="fas fa-trash">  </b>
@@ -155,6 +175,7 @@ export class OwnerView extends Component {
           </div>
           <h5>
             Managers :<i>{this.state.employees.length}</i>
+            {localStorage.setItem("managers",this.state.employees.length)}   
           </h5>
           <br />
           <br />
